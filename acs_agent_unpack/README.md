@@ -8,18 +8,23 @@ In the folder I have Dolphin (or actually the name is supposed to be Kairu) file
 
 4. Install Python (if you don't have it): https://www.python.org/downloads/")
 5. Install FFmpeg (required by pydub for audio conversion):
-   - Windows: https://www.gyan.dev/ffmpeg/builds/
+   - Windows: https://www.gyan.dev/ffmpeg/builds/ `winget install ffmpeg`
    - macOS: `brew install ffmpeg` (using Homebrew)
    - Linux: `sudo apt update && sudo apt install ffmpeg` (Debian/Ubuntu)
 
 6. I was on a Mac so I did these to create virtual environment and installed prerequisites
-```python3 -m venv venv```
-```source venv/bin/activate```
-```pip install -r requirements.txt```
+   ```python3 -m venv venv```
+   ```source venv/bin/activate```
+   if you are on windows you may need to do
+   ```py -m venv venv```
+   ```.\venv\Scripts\activate```
 
-7. You may need to change main.py for the agent name and your ACS file name in the main method
-Finally do
+7. ```pip install -r requirements.txt``` (if you are on python 3.13 you may also need to do ```pip install audioop-lts```)
+
+8. You may need to change main.py for the agent name and your ACS file name in the main method
+   Finally do
 ```python main.py```
+
 a ```agent.js``` file and a ```sounds-mp3.js``` file will be generated, a ```map.png``` will also be generated in the Images directory (I still need to use other software to get rid of the neon background transparency color separately but these files can then be used in the clippy js)
 
 
