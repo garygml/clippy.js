@@ -44,23 +44,30 @@ clippy.Agent.prototype = {
      * @param {Boolean=} fast
      *
      */
-    hide:function (fast, callback) {
+    hide: function (fast, callback) {
         this._hidden = true;
         var el = this._el;
-        this.stop();
+        this.stop(); // This calls animator.exitAnimation(), which now clears the current audio
+
+        // Add a call to unload ALL sounds when hiding fast
         if (fast) {
             this._el.hide();
             this.stop();
             this.pause();
+            // Call an animator method to unload all sounds
+            this._animator.unloadAllSounds();
             if (callback) callback();
             return;
         }
 
-        return this._playInternal('Hide', function () {
+        // --- FIX STARTS HERE ---
+        return this._playInternal('Hide', $.proxy(function () { // Use $.proxy to bind 'this'
             el.hide();
             this.pause();
+            this._animator.unloadAllSounds();
             if (callback) callback();
-        })
+        }, this)); // Pass 'this' as the context for the proxy
+        // --- FIX ENDS HERE ---
     },
 
 
@@ -487,6 +494,7 @@ clippy.Animator = function (el, path, data, sounds) {
         this._overlays.push(inner);
         curr = inner;
     }
+    this._currentAudio = undefined;
 };
 
 clippy.Animator.prototype = {
@@ -514,8 +522,9 @@ clippy.Animator.prototype = {
             var snd = this._data.sounds[i];
             var uri = sounds[snd];
             if (!uri) continue;
+            // We'll still create them here for now, but manage their lifecycle.
             this._sounds[snd] = new Audio(uri);
-
+            this._sounds[snd].preload = 'auto'; // Or 'none' to only load when played
         }
     },
     hasAnimation:function (name) {
@@ -524,6 +533,12 @@ clippy.Animator.prototype = {
 
     exitAnimation:function () {
         this._exiting = true;
+        if (this._currentAudio) {
+            this._currentAudio.pause();
+            this._currentAudio.currentTime = 0;
+            this._currentAudio.src = ''; // Deallocate the WebMediaPlayer
+            this._currentAudio = undefined;
+        }
     },
 
 
@@ -598,7 +613,30 @@ clippy.Animator.prototype = {
         var s = this._currentFrame.sound;
         if (!s) return;
         var audio = this._sounds[s];
-        if (audio) audio.play();
+        if (audio) {
+            if (this._currentAudio && this._currentAudio !== audio) { // Only stop if a different audio is playing
+                this._currentAudio.pause();
+                this._currentAudio.currentTime = 0;
+                this._currentAudio.src = ''; // Deallocate previous
+            }
+            audio.src = audio.originalSrc || audio.src; // Restore src if it was cleared
+            audio.play().catch(e => console.warn("Audio play failed:", e)); // Add catch for Promise rejection
+            this._currentAudio = audio;
+            audio.originalSrc = audio.originalSrc || audio.src; // Store original src
+        }
+    },
+
+    _unloadSound: function(soundName) {
+        var audio = this._sounds[soundName];
+        if (audio) {
+            audio.pause();
+            audio.currentTime = 0;
+            audio.src = ''; // This is the key to deallocating the WebMediaPlayer
+            delete this._sounds[soundName]; // Remove from cache
+            if (this._currentAudio === audio) {
+                this._currentAudio = undefined;
+            }
+        }
     },
 
     _atLastFrame:function () {
@@ -645,7 +683,28 @@ clippy.Animator.prototype = {
      */
     resume:function () {
         this._step();
-    }
+    },
+
+    unloadAllSounds: function() {
+        if (this._currentAudio) {
+            this._currentAudio.pause();
+            this._currentAudio.currentTime = 0;
+            this._currentAudio.src = '';
+            this._currentAudio = undefined;
+        }
+        for (var snd in this._sounds) {
+            if (this._sounds.hasOwnProperty(snd)) {
+                var audio = this._sounds[snd];
+                audio.pause();
+                audio.currentTime = 0;
+                audio.src = ''; // Deallocate
+                // Note: We don't delete from _sounds here, assuming an agent might be shown again
+                // If you intend to permanently destroy the agent, then delete this._sounds[snd];
+            }
+        }
+        // If you want to truly clear the loaded sounds, you'd do:
+        // this._sounds = {};
+    },
 };
 
 clippy.Animator.States = { WAITING:1, EXITED:0 };
@@ -664,8 +723,8 @@ clippy.Balloon = function (targetEl) {
 
 clippy.Balloon.prototype = {
 
-    WORD_SPEAK_TIME:320,
-    CLOSE_BALLOON_DELAY:2000,
+    WORD_SPEAK_TIME:120,
+    CLOSE_BALLOON_DELAY:5000,
 
     _setup:function () {
 
@@ -693,7 +752,7 @@ clippy.Balloon.prototype = {
      * @private
      */
     _position:function (side) {
-        var o = this._targetEl.offset();
+        var o = this._targetEl.position();
         var h = this._targetEl.height();
         var w = this._targetEl.width();
 
@@ -844,7 +903,7 @@ clippy.Balloon.prototype = {
 
 };
 
-clippy.BASE_PATH = '//s3.amazonaws.com/clippy.js/Agents/';
+clippy.BASE_PATH = './assets/js/clippyjs/agents/';
 
 clippy.load = function (name, successCb, failCb) {
     var path = clippy.BASE_PATH + name;
