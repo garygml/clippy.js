@@ -321,19 +321,22 @@ if __name__ == "__main__":
             for frame in anim_data.get("frames", []):
                 new_frame = {
                     "duration": frame.get("duration", 0),
-                    "images": frame.get("images", []),
-                    "sound": frame.get("sound", None)
+                    "images": frame.get("images", [])
+                    
                 }
-                # if "sound" in frame:
-                #     sound_file = frame["sound"]
-                #     # Extract the numeric part of the sound file (e.g., "0000" from "0000.wav")
-                #     sound_name_only = os.path.splitext(sound_file)[0]
-                #     if sound_name_only not in sound_map:
-                #         sound_map[sound_name_only] = str(sound_counter)
-                #         agent_data["sounds"].append(str(sound_counter))
-                #         sound_counter += 1
-                #     new_frame["sound"] = sound_map[sound_name_only]
                 
+                # If the frame has a sound, we can include it in the frame data.
+                if "sound" in frame:
+                    new_frame["sound"] = frame["sound"]
+
+                # If exitBranch is present, we can include it in the frame data.
+                if "exitBranch" in frame:
+                    new_frame["exitBranch"] = frame["exitBranch"]
+                
+                # If the frame has branching, we can include it in the frame data.
+                if "branching" in frame:
+                    new_frame["branching"] = frame["branching"]
+
                 # The clippy.js format doesn't directly use 'exitBranch' in the frame data.
                 # If 'exitBranch' is crucial for animation logic, you might need to adapt clippy.js
                 # or store it in a custom property if clippy.js allows extensions.
