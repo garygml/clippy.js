@@ -288,13 +288,13 @@ def read_acs_animations(file_path, sprite_coordinates):
 # --- How to use the function ---
 if __name__ == "__main__":
 
-    agent_name = "Dolphin"
-    acs_file_path = 'DOLPHIN.ACS' 
+    agent_name = "RsAgentxx"
+    acs_file_path = 'RsAgentxx.ACS' 
 
     # Create the sprite sheet from BMPs
-    sprite_coordinates, sprite_width, sprite_height = create_sprite_sheet_from_bmps("./DOLPHIN ACS Decompiled/Images", "./map.png")
+    sprite_coordinates, sprite_width, sprite_height = create_sprite_sheet_from_bmps("./RsAgentxx ACS Decompiled/Images", "./map.png")
 
-    sound_data = generate_sounds_mp3_js("./DOLPHIN ACS Decompiled/Audio", agent_name, "sounds-mp3.js")
+    sound_data = generate_sounds_mp3_js("./RsAgentxx ACS Decompiled/Audio", agent_name, "sounds-mp3.js")
     sound_names = []
     if sound_data:
         for key, value in sound_data.items():
