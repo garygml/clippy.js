@@ -1,20 +1,20 @@
 clippy.ready('RsAgentxx', {
     "overlayCount": 1,
     "sounds": [
-        "0000.wav",
-        "0001.wav",
-        "0002.wav",
-        "0003.wav",
         "0004.wav",
         "0005.wav",
-        "0006.wav"
+        "0006.wav",
+        "0002.wav",
+        "0003.wav",
+        "0001.wav",
+        "0000.wav"
     ],
     "framesize": [
         186,
         200
     ],
     "animations": {
-        "SHOW": {
+        "Show": {
             "frames": [
                 {
                     "duration": 70,
@@ -333,7 +333,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "HIDE": {
+        "Hide": {
             "frames": [
                 {
                     "duration": 100,
@@ -659,7 +659,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "STAND": {
+        "Stand": {
             "frames": [
                 {
                     "duration": 100,
@@ -672,7 +672,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "SCANNING": {
+        "Scanning": {
             "frames": [
                 {
                     "duration": 50,
@@ -990,7 +990,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "IDLEBLINK": {
+        "IdleBlink": {
             "frames": [
                 {
                     "duration": 150,
@@ -1155,7 +1155,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "SNARL": {
+        "Snarl": {
             "frames": [
                 {
                     "duration": 70,
@@ -1312,7 +1312,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "HANDSTAND": {
+        "HandStand": {
             "frames": [
                 {
                     "duration": 70,
@@ -1532,7 +1532,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "GALLY": {
+        "Gally": {
             "frames": [
                 {
                     "duration": 150,
@@ -1609,7 +1609,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "KILLVIRUS": {
+        "KillVirus": {
             "frames": [
                 {
                     "duration": 70,
@@ -1938,7 +1938,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "FINDINGVIRUS": {
+        "FindingVirus": {
             "frames": [
                 {
                     "duration": 100,
@@ -2355,7 +2355,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "DELETEFILE": {
+        "DeleteFile": {
             "frames": [
                 {
                     "duration": 70,
@@ -2756,7 +2756,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "IGNOREVIRUS": {
+        "IgnoreVirus": {
             "frames": [
                 {
                     "duration": 100,
@@ -3049,7 +3049,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "IDLESLEEPING": {
+        "IdleSleeping": {
             "frames": [
                 {
                     "duration": 100,
@@ -3695,7 +3695,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "EATWATERMELON": {
+        "EatWatermelon": {
             "frames": [
                 {
                     "duration": 50,
@@ -3942,7 +3942,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "PREVENT": {
+        "Prevent": {
             "frames": [
                 {
                     "duration": 100,
@@ -4108,7 +4108,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "YOU": {
+        "You": {
             "frames": [
                 {
                     "duration": 100,
@@ -4274,7 +4274,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "LOOK": {
+        "Look": {
             "frames": [
                 {
                     "duration": 100,
@@ -4395,7 +4395,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "GRIMACE": {
+        "Grimace": {
             "frames": [
                 {
                     "duration": 100,
@@ -4462,7 +4462,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "SORRY": {
+        "Sorry": {
             "frames": [
                 {
                     "duration": 100,
@@ -4682,7 +4682,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "2003_1_DRINK": {
+        "2003_1_Drink": {
             "frames": [
                 {
                     "duration": 100,
@@ -4884,7 +4884,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "2003_2_PLAYCOMPUTER": {
+        "2003_2_PlayComputer": {
             "frames": [
                 {
                     "duration": 100,
@@ -5050,7 +5050,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "2003_3_CHOPTREE": {
+        "2003_3_ChopTree": {
             "frames": [
                 {
                     "duration": 100,
@@ -5116,7 +5116,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "2003_4_PLAYFOOTBALL": {
+        "2003_4_PlayFootBall": {
             "frames": [
                 {
                     "duration": 100,
@@ -5615,7 +5615,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "2003_5_JUMP": {
+        "2003_5_Jump": {
             "frames": [
                 {
                     "duration": 100,
@@ -5781,7 +5781,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "2003_6_KNIFE": {
+        "2003_6_Knife": {
             "frames": [
                 {
                     "duration": 100,
@@ -6019,7 +6019,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "2003_7_BIKE": {
+        "2003_7_Bike": {
             "frames": [
                 {
                     "duration": 100,
@@ -6248,7 +6248,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "2003_8_FIXCOMPUTER": {
+        "2003_8_FixComputer": {
             "frames": [
                 {
                     "duration": 100,
@@ -6378,7 +6378,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "2003_9_REST": {
+        "2003_9_Rest": {
             "frames": [
                 {
                     "duration": 100,
@@ -6535,7 +6535,7 @@ clippy.ready('RsAgentxx', {
                 }
             ]
         },
-        "2003_10_CLIMB": {
+        "2003_10_Climb": {
             "frames": [
                 {
                     "duration": 100,
